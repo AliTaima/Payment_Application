@@ -1,8 +1,8 @@
 //Header file guard
-#ifndef APP_H_
-#define APP_H_
+#ifndef APP_H
+#define APP_H
 
 
 
 
-#endif // !APP_H_
+#endif // !APP_H

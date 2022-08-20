@@ -1,8 +1,8 @@
 //Header file guard
-#ifndef SERVER_H_
-#define SERVER_H_
+#ifndef SERVER_H
+#define SERVER_H
 
 
 
 
-#endif // !SERVER_H_
+#endif // !SERVER_H

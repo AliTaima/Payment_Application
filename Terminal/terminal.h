@@ -1,8 +1,8 @@
 
 //header file guard
-#ifndef TERMINAL_H_
-#define TERMINAL_H_
+#ifndef TERMINAL_H
+#define TERMINAL_H
 
 
 
-#endif // !TERMINAL_H_
+#endif // !TERMINAL_H
