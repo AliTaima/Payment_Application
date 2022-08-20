@@ -4,6 +4,5 @@
 
 
 
-void appStart(void);
 
 #endif // !APP_H_
