@@ -4,6 +4,7 @@
 #define CARD_H
 
 //typedefs
+typedef unsigned char uint8_t;
 typedef struct ST_cardData_t
 {
 	uint8_t cardHolderName[25];
