@@ -1,3 +1,8 @@
+//Header file guard
+#ifndef SERVER_H_
+#define SERVER_H_
+
+
 typedef struct ST_transaction_t
 {
 	ST_cardData_t cardHolderData;
@@ -28,3 +33,5 @@ EN_serverError_t isValidAccount(ST_cardData_t* cardData);
 EN_serverError_t isAmountAvailable(ST_trminalData_t* termData);
 EN_serverError_t saveTransaction(ST_transaction_t* transData);
 EN_serverError_t getTransaction(uint32_t transactionSequenceNumber, ST_transaction_t* transData);
+
+#endif // !SERVER_H_
