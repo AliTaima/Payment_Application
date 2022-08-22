@@ -1,8 +1,0 @@
-# depslib dependency file v1.0
-1661158073 source:b:\courses\embedded_systems_fwd_t2_professional\projects\payment_application\card\main.c
-	<stdio.h>
-	<string.h>
-	"card.h"
-
-1661157196 b:\courses\embedded_systems_fwd_t2_professional\projects\payment_application\card\card.h
-
