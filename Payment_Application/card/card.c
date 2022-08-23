@@ -2,33 +2,33 @@
 #include <string.h>
 #include "card.h"
 
-int main()
-{
-    ST_cardData_t cardData;
-    // checking card hoder name specifications
-    if(getCardHolderName(&cardData) == WRONG_NAME)
-        printf("error! Card holder name is 24 alphabetic characters string max and 20 min\n");
-    else
-    {
-        // checking car expiry date specifications
-        if(getCardExpiryDate(&cardData) == WRONG_EXP_DATE)
-            printf("error! Card expiry date is 5 characters string in the format \"MM/YY\", e.g \"05/25\" \n");
-        else
-        {
-            //checking card pan specifications
-            if(getCardPAN(&cardData) == WRONG_PAN)
-                printf("error! PAN is 20 numeric characters string, 19 character max, and 16 character min\n");
-
-        }
-    }
-    printf("-----------------You entered these data---------------------\n");
-    printf("%s\n", cardData.cardHolderName);
-    printf("%s\n", cardData.cardExpirationDate);
-    printf("%s\n", cardData.primaryAccountNumber);
-
-
-    return 0;
-}
+//int main()
+//{
+//    ST_cardData_t cardData;
+//    // checking card hoder name specifications
+//    if(getCardHolderName(&cardData) == WRONG_NAME)
+//        printf("error! Card holder name is 24 alphabetic characters string max and 20 min\n");
+//    else
+//    {
+//        // checking car expiry date specifications
+//        if(getCardExpiryDate(&cardData) == WRONG_EXP_DATE)
+//            printf("error! Card expiry date is 5 characters string in the format \"MM/YY\", e.g \"05/25\" \n");
+//        else
+//        {
+//            //checking card pan specifications
+//            if(getCardPAN(&cardData) == WRONG_PAN)
+//                printf("error! PAN is 20 numeric characters string, 19 character max, and 16 character min\n");
+//
+//        }
+//    }
+//    printf("-----------------You entered these data---------------------\n");
+//    printf("%s\n", cardData.cardHolderName);
+//    printf("%s\n", cardData.cardExpirationDate);
+//    printf("%s\n", cardData.primaryAccountNumber);
+//
+//
+//    return 0;
+//}
 
 EN_cardError_t getCardHolderName(ST_cardData_t* cardData)
 {
