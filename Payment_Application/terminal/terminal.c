@@ -3,51 +3,51 @@
 #include <string.h>
 #include "..\card\card.h"           
 #include "terminal.h"
-int main()
-{
-    ST_terminalData_t termData;
-    ST_cardData_t cardData;         
-    // getting card expiry date 
-    if(getCardExpiryDate(&cardData) == WRONG_EXP_DATE)                      
-        printf("error! Card expiry date is 5 characters string in the format \"MM/YY\", e.g \"05/25\"\n");    
-    else
-    {
-        // getting transaction date
-        if(getTransactionDate(&termData) == WRONG_DATE)
-            printf("error! Transaction date is 10 characters string in the format DD/MM/YYYY, e.g 25/06/2022\n");
-        else
-        {   // checking if the card is expired or not
-            if (isCardExpired(&cardData, &termData) == EXPIRED_CARD)
-                printf("error! Expired card\n");
-            else
-            {   // getting max amount
-                if (setMaxAmount(&termData) == INVALID_MAX_AMOUNT)
-                    printf("error! Invalide max amount\n");
-                else
-                {   // getting the transaction amount 
-                    if(getTransactionAmount(& termData) == INVALID_AMOUNT)
-                        printf("error! Invalid amount\n");
-                    else
-                    {   // checking if the transaction that entered is less that max amount or not
-                        if (isBelowMaxAmount(&termData) == EXCEED_MAX_AMOUNT)
-                            printf("error! Exceed max amount\n");
-                    }
-                }
-            }
-        }
-        
-
-    }
-
-    printf("-----------------You entered these data---------------------\n");
-    printf("The card expiry date = %s\n", cardData.cardExpirationDate);
-    printf("The transaction date = %s\n", termData.transactionDate);
-    printf("The max transaction amount = %.1f\n", termData.maxTransAmount);
-    printf("The transaction amount = %.1f\n", termData.transAmount);
-
-
-    return 0;
-}
+//int main()
+//{
+//    ST_terminalData_t termData;
+//    ST_cardData_t cardData;         
+//    // getting card expiry date 
+//    if(getCardExpiryDate(&cardData) == WRONG_EXP_DATE)                      
+//        printf("error! Card expiry date is 5 characters string in the format \"MM/YY\", e.g \"05/25\"\n");    
+//    else
+//    {
+//        // getting transaction date
+//        if(getTransactionDate(&termData) == WRONG_DATE)
+//            printf("error! Transaction date is 10 characters string in the format DD/MM/YYYY, e.g 25/06/2022\n");
+//        else
+//        {   // checking if the card is expired or not
+//            if (isCardExpired(&cardData, &termData) == EXPIRED_CARD)
+//                printf("error! Expired card\n");
+//            else
+//            {   // getting max amount
+//                if (setMaxAmount(&termData) == INVALID_MAX_AMOUNT)
+//                    printf("error! Invalide max amount\n");
+//                else
+//                {   // getting the transaction amount 
+//                    if(getTransactionAmount(& termData) == INVALID_AMOUNT)
+//                        printf("error! Invalid amount\n");
+//                    else
+//                    {   // checking if the transaction that entered is less that max amount or not
+//                        if (isBelowMaxAmount(&termData) == EXCEED_MAX_AMOUNT)
+//                            printf("error! Exceed max amount\n");
+//                    }
+//                }
+//            }
+//        }
+//        
+//
+//    }
+//
+//    printf("-----------------You entered these data---------------------\n");
+//    printf("The card expiry date = %s\n", cardData.cardExpirationDate);
+//    printf("The transaction date = %s\n", termData.transactionDate);
+//    printf("The max transaction amount = %.1f\n", termData.maxTransAmount);
+//    printf("The transaction amount = %.1f\n", termData.transAmount);
+//
+//
+//    return 0;
+//}
 EN_terminalError_t getTransactionDate(ST_terminalData_t *termData)
 {
     /*
