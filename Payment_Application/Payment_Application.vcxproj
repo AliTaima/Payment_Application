@@ -19,11 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Application\app.c" />
     <ClCompile Include="card\card.c" />
+    <ClCompile Include="Server\server.c" />
     <ClCompile Include="terminal\terminal.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Application\app.h" />
     <ClInclude Include="card\card.h" />
+    <ClInclude Include="Server\server.h" />
     <ClInclude Include="terminal\terminal.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

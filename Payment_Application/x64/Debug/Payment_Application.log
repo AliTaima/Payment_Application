@@ -1,3 +1,2 @@
-﻿  terminal.c
-B:\Courses\Embedded_Systems_FWD_T2_Professional\Projects\Payment_Application\Payment_Application\terminal\terminal.c(63,5): warning C4013: 'gets' undefined; assuming extern returning int
+﻿  app.c
   Payment_Application.vcxproj -> B:\Courses\Embedded_Systems_FWD_T2_Professional\Projects\Payment_Application\x64\Debug\Payment_Application.exe

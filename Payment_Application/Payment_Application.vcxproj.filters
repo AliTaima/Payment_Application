@@ -21,12 +21,24 @@
     <ClCompile Include="terminal\terminal.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Server\server.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\app.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="card\card.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="terminal\terminal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\app.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
