@@ -4,6 +4,24 @@
 
 //int main()
 //{
+//    //test cases
+//    /*
+//        // successful test case
+//        Ali Mohamed Taima Hummus
+//        10/26
+//        8989374615436851
+//        //fail in name 
+//        Ali Mohamed
+//        Ali Mohamed Taima Hummus Mohamed
+//
+//        //fail in date
+//        Ali Mohamed Taima Hummus
+//        5/27
+//        //fail in pan
+//        Ali Mohamed Taima Hummus
+//        11/26
+//        898937
+//    */
 //    ST_cardData_t cardData;
 //    // checking card hoder name specifications
 //    if(getCardHolderName(&cardData) == WRONG_NAME)

@@ -5,6 +5,23 @@
 #include "terminal.h"
 //int main()
 //{
+//    //test cases
+//    /*
+//        //success test case
+//        0/25
+//        12/10/2022
+//        5000
+//        3000
+//        //wrong test case date
+//        12/22
+//        12/10/2025
+//        //wrong test case transaction amount 
+//        15/25
+//        12/10/2022
+//        3000
+//        5000
+//    */
+//                      
 //    ST_terminalData_t termData;
 //    ST_cardData_t cardData;         
 //    // getting card expiry date 

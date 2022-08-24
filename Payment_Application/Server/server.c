@@ -21,47 +21,62 @@ ST_accountsDB_t database[255] = {	2000.0, RUNNING, "8989374615436851",
 // intialize global array of ST_transaction_t with zeros
 ST_transaction_t transaction_data[255] = { 0, 0, 0, 0 };
 
-int main()
-{
-	ST_terminalData_t termData;
-	ST_cardData_t cardData;
-	ST_transaction_t transData;
-	
-	// Getting card pan 
-    if(getCardPAN(&cardData) == WRONG_PAN)
-        printf("error! PAN is 20 numeric characters string, 19 character max, and 16 character min");
-	else
-	{	// Getting transaction amount
-		if (getTransactionAmount(&termData) == INVALID_AMOUNT)
-			printf("error! Invalid amount");
-		else
-		{	
-			
-			// Assigning card and terminal data to the trasdata
-			transData.cardHolderData = cardData;
-			transData.terminalData = termData;
-			if (recieveTransactionData(&transData) == FRAUD_CARD)
-				printf("error! Fraud card");
-			else
-			{
-				if (recieveTransactionData(&transData) == DECLINED_STOLEN_CARD)
-					printf("error! Declined stolen card");
-				else
-				{
-					if (recieveTransactionData(&transData) == DECLINED_INSUFFECIENT_FUND)
-						printf("error! Declined insuffecient fund");
-					else
-					{
-						if (recieveTransactionData(&transData) == APPROVED)
-							printf("-----------------Successful process-----------------");
-					}
-				}
-			}
-		}
-	}
-
-	return 0;
-}
+//int main()
+//{
+//	//test cases
+//	/*
+//		// Printing Successful process
+//		8989374615436851
+//		1000
+//		// printing error! Declined insuffecient fund(transactio amount > balance)
+//		8989374615436851
+//		3000
+//		// Printing error! Declined stolen card(BLOCKED)
+//		6317671354844040
+//		2000
+//		//Printing error! Fraud card (account not found in database)
+//		8989374615436850
+//		1000
+//	*/
+//	ST_terminalData_t termData;
+//	ST_cardData_t cardData;
+//	ST_transaction_t transData;
+//	
+//	// Getting card pan 
+//    if(getCardPAN(&cardData) == WRONG_PAN)
+//        printf("error! PAN is 20 numeric characters string, 19 character max, and 16 character min");
+//	else
+//	{	// Getting transaction amount
+//		if (getTransactionAmount(&termData) == INVALID_AMOUNT)
+//			printf("error! Invalid amount");
+//		else
+//		{	
+//			
+//			// Assigning card and terminal data to the trasdata
+//			transData.cardHolderData = cardData;
+//			transData.terminalData = termData;
+//			if (recieveTransactionData(&transData) == FRAUD_CARD)
+//				printf("error! Fraud card");
+//			else
+//			{
+//				if (recieveTransactionData(&transData) == DECLINED_STOLEN_CARD)
+//					printf("error! Declined stolen card");
+//				else
+//				{
+//					if (recieveTransactionData(&transData) == DECLINED_INSUFFECIENT_FUND)
+//						printf("error! Declined insuffecient fund");
+//					else
+//					{
+//						if (recieveTransactionData(&transData) == APPROVED)
+//							printf("-----------------Successful process-----------------");
+//					}
+//				}
+//			}
+//		}
+//	}
+//
+//	return 0;
+//}
 EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 {
 	/*
