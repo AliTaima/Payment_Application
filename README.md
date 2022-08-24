@@ -11,6 +11,7 @@ This is the 1st project in the Embedded Systems - FWD T2 Professional track.
 - Implement the server module
 - Implement the application
 - Testing the application
+
 ### Development environment preparation
 ---
 - We should organize our project by creating new folder for each module in our project, .c and .h files for each module with header file guard for each .h file
@@ -41,7 +42,7 @@ It's required to create these four functions to implement this module
 - EN_serverError_t isAmountAvailable(ST_terminalData_t* termData, ST_accountsDB_t* accountRefrence)
   - This [README_file](https://github.com/AliTaima/Payment_Application/tree/main/Payment_Application/Server) contains screenshot for server.h file,  server-side accounts' database array, server-side transactions' database and videos to explain each function
 ### The app module
---
+---
 It's required to create this function to implement this module
 - void appStart(void)
   - This [README_file](https://github.com/AliTaima/Payment_Application/blob/main/Payment_Application/Application/README.md) contains screenshot for app.h file and videos to explain this function try required five test cases
