@@ -18,12 +18,26 @@ This is the 1st project in the Embedded Systems - FWD T2 Professional track.
   - This [README_file](https://github.com/AliTaima/Payment_Application/blob/main/Development_environment_preparation/README.md) contains screenshots for the folder structure, files in each folder and header file guard
 ### The card module
 ---
-It's required to create three functions to implement this module 
+It's required to create these three functions to implement this module 
 - EN_cardError_t getCardHolderName(ST_cardData_t *cardData)
 - EN_cardError_t getCardExpiryDate(ST_cardData_t *cardData)
 - EN_cardError_t getCardPAN(ST_cardData_t *cardData)
-  - This [README_file](https://github.com/AliTaima/Payment_Application/blob/main/Payment_Application/card/README.md) contains screenshot for card.h file and video to explain each function
-
-
-
+  - This [README_file](https://github.com/AliTaima/Payment_Application/blob/main/Payment_Application/card/README.md) contains screenshot for card.h file and videos to explain each function
+### The terminal module
+---
+It's required to create these five functions to implement this module 
+- EN_terminalError_t getTransactionDate(ST_terminalData_t *termData)
+- EN_terminalError_t isCardExpired(ST_cardData_t *cardData, ST_terminalData_t *termData)
+- EN_terminalError_t getTransactionAmount(ST_terminalData_t *termData)
+- EN_terminalError_t isBelowMaxAmount(ST_terminalData_t *termData)
+- EN_terminalError_t setMaxAmount(ST_terminalData_t *termData)
+  - This [README_file](https://github.com/AliTaima/Payment_Application/tree/main/Payment_Application/terminal) contains screenshot for termnal.h file and videos to explain each function
+### The server module
+---
+It's required to create these four functions to implement this module
+- EN_transState_t recieveTransactionData(ST_transaction_t* transData)
+- EN_serverError_t isValidAccount(ST_cardData_t* cardData, ST_accountsDB_t* accountRefrence)
+- EN_serverError_t isBlockedAccount(ST_accountsDB_t* accountRefrence)
+- EN_serverError_t isAmountAvailable(ST_terminalData_t* termData, ST_accountsDB_t* accountRefrence)
+  - This [README_file](https://github.com/AliTaima/Payment_Application/tree/main/Payment_Application/Server) contains screenshot for server.h file and videos to explain each function
 
