@@ -2,6 +2,7 @@
 This is the 1st project in the Embedded Systems - FWD T2 Professional track.
 ---
 Payment systems are now available everywhere and everyone interacts with these systems every day.
+![payment-flowchart](https://user-images.githubusercontent.com/87614712/186474556-7efa05a9-1053-4070-8a02-de586c1c6826.jpeg)
 ## Project Requirements
 ---
 - Development environment preparation
