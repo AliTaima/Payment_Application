@@ -21,58 +21,64 @@ ST_accountsDB_t database[255] = {	2000.0, RUNNING, "8989374615436851",
 // intialize global array of ST_transaction_t with zeros
 ST_transaction_t transaction_data[255] = { 0, 0, 0, 0 };
 
-//int main()
-//{
-//	ST_terminalData_t termData;
-//	ST_cardData_t cardData;
-//	ST_transaction_t transData;
-//	
-//	// Getting card pan 
-//    if(getCardPAN(&cardData) == WRONG_PAN)
-//        printf("error! PAN is 20 numeric characters string, 19 character max, and 16 character min");
-//	else
-//	{	// Getting transaction amount
-//		if (getTransactionAmount(&termData) == INVALID_AMOUNT)
-//			printf("error! Invalid amount");
-//		else
-//		{	
-//			//printf("The transaction amount from getTransactionAmount function = %f\n", termData.transAmount);
-//			
-//			// Assigning card and terminal data to the trasdata
-//			transData.cardHolderData = cardData;
-//			transData.terminalData = termData;
-//			if (recieveTransactionData(&transData) == FRAUD_CARD)
-//				printf("error! Fraud card");
-//			else
-//			{
-//				if (recieveTransactionData(&transData) == DECLINED_STOLEN_CARD)
-//					printf("error! Declined stolen card");
-//				else
-//				{
-//					if (recieveTransactionData(&transData) == DECLINED_INSUFFECIENT_FUND)
-//						printf("error! Declined insuffecient fund");
-//					else
-//					{
-//						if (recieveTransactionData(&transData) == APPROVED)
-//							printf("-----------------Successful process-----------------");
-//					}
-//				}
-//			}
-//		}
-//	}
-//
-//	return 0;
-//}
+int main()
+{
+	ST_terminalData_t termData;
+	ST_cardData_t cardData;
+	ST_transaction_t transData;
+	
+	// Getting card pan 
+    if(getCardPAN(&cardData) == WRONG_PAN)
+        printf("error! PAN is 20 numeric characters string, 19 character max, and 16 character min");
+	else
+	{	// Getting transaction amount
+		if (getTransactionAmount(&termData) == INVALID_AMOUNT)
+			printf("error! Invalid amount");
+		else
+		{	
+			
+			// Assigning card and terminal data to the trasdata
+			transData.cardHolderData = cardData;
+			transData.terminalData = termData;
+			if (recieveTransactionData(&transData) == FRAUD_CARD)
+				printf("error! Fraud card");
+			else
+			{
+				if (recieveTransactionData(&transData) == DECLINED_STOLEN_CARD)
+					printf("error! Declined stolen card");
+				else
+				{
+					if (recieveTransactionData(&transData) == DECLINED_INSUFFECIENT_FUND)
+						printf("error! Declined insuffecient fund");
+					else
+					{
+						if (recieveTransactionData(&transData) == APPROVED)
+							printf("-----------------Successful process-----------------");
+					}
+				}
+			}
+		}
+	}
+
+	return 0;
+}
 EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 {
+	/*
+		This function will take all transaction data and validate its data.
+		It checks the account details and amount availability.
+		If the account does not exist return FRAUD_CARD, 
+		if the amount is not available will return DECLINED_INSUFFECIENT_FUND, 
+		if the account is blocked will return DECLINED_STOLEN_CARD, 
+		else returns APPROVED.
+	*/
 	ST_accountsDB_t accountRefrence;
 
 	if (isValidAccount(&transData->cardHolderData, &accountRefrence) == ACCOUNT_NOT_FOUND)
 		return FRAUD_CARD;
 	else
 	{
-		/*printf("The balance of this account = %f\n", accountRefrence.balance);
-		printf("The account number = %s\n", accountRefrence.primaryAccountNumber);*/
+		
 		if (isBlockedAccount(&accountRefrence) == BLOCKED_ACCOUNT)
 			return DECLINED_STOLEN_CARD;
 		else
@@ -89,6 +95,12 @@ EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 }
 EN_serverError_t isValidAccount(ST_cardData_t* cardData, ST_accountsDB_t* accountRefrence)
 {
+	/*
+		This function will take card data and validate if the account related to this card exists or not.
+		It checks if the PAN exists or not in the server's database (searches for the card PAN in the DB).
+		If the PAN doesn't exist will return ACCOUNT_NOT_FOUND, 
+		else will return SERVER_OK and return a reference to this account in the DB.
+	*/
 	int a;
 	for (a = 0; a < database_num; a++)
 	{
@@ -105,6 +117,11 @@ EN_serverError_t isValidAccount(ST_cardData_t* cardData, ST_accountsDB_t* accoun
 }
 EN_serverError_t isBlockedAccount(ST_accountsDB_t* accountRefrence)
 {
+	/*
+		This function will take a reference to an existing account in the database.
+		It checks if the account is blocked or not.
+		If the account is blocked, will return BLOCKED_ACCOUNT, else will return SERVER_OK.
+	*/
 	 
 	if (accountRefrence->state == BLOCKED)
 		return BLOCKED_ACCOUNT;
@@ -114,6 +131,11 @@ EN_serverError_t isBlockedAccount(ST_accountsDB_t* accountRefrence)
 }
 EN_serverError_t isAmountAvailable(ST_terminalData_t* termData, ST_accountsDB_t* accountRefrence)
 {
+	/*
+		This function will take terminal data and validate these data.
+		It checks if the transaction's amount is available or not.
+		If the transaction amount is greater than the balance in the database will return LOW_BALANCE, else will return SERVER_OK
+	*/
 	// in this function I add additional pointer of ST_accountsDB_t* accountRefrence to use its data in the comparison tha I make
 	if (termData->transAmount > accountRefrence->balance)
 		return LOW_BALANCE;
