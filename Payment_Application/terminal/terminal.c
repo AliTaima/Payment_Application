@@ -7,14 +7,14 @@ int main()
 {
     ST_terminalData_t termData;
     ST_cardData_t cardData;         
-
-    // getting transaction date
-    if(getTransactionDate(&termData) == WRONG_DATE)
-        printf("error! Transaction date is 10 characters string in the format DD/MM/YYYY, e.g 25/06/2022\n");
+    // getting card expiry date 
+    if(getCardExpiryDate(&cardData) == WRONG_EXP_DATE)                      
+        printf("error! Card expiry date is 5 characters string in the format \"MM/YY\", e.g \"05/25\"\n");    
     else
-    {   // getting card expiry date 
-        if(getCardExpiryDate(&cardData) == WRONG_EXP_DATE)                      
-            printf("error! Card expiry date is 5 characters string in the format \"MM/YY\", e.g \"05/25\"\n");    
+    {
+        // getting transaction date
+        if(getTransactionDate(&termData) == WRONG_DATE)
+            printf("error! Transaction date is 10 characters string in the format DD/MM/YYYY, e.g 25/06/2022\n");
         else
         {   // checking if the card is expired or not
             if (isCardExpired(&cardData, &termData) == EXPIRED_CARD)
@@ -30,10 +30,8 @@ int main()
                     else
                     {   // checking if the transaction that entered is less that max amount or not
                         if (isBelowMaxAmount(&termData) == EXCEED_MAX_AMOUNT)
-                            printf("Exceed max amount\n");
+                            printf("error! Exceed max amount\n");
                     }
-                    
-                    
                 }
             }
         }
@@ -42,10 +40,10 @@ int main()
     }
 
     printf("-----------------You entered these data---------------------\n");
+    printf("The card expiry date = %s\n", cardData.cardExpirationDate);
     printf("The transaction date = %s\n", termData.transactionDate);
-    printf("The card expiration = %s\n", cardData.cardExpirationDate);
-    printf("The transaction amount = %.1f\n", termData.transAmount);
     printf("The max transaction amount = %.1f\n", termData.maxTransAmount);
+    printf("The transaction amount = %.1f\n", termData.transAmount);
 
 
     return 0;
@@ -59,7 +57,7 @@ EN_terminalError_t getTransactionDate(ST_terminalData_t *termData)
     */
     printf("Enter the transaction date int this forrmate DD/MM/YYYY: ");
     gets(termData->transactionDate);
-    if(strlen(termData->transactionDate) < 10 || strlen(termData->transactionDate) > 10 || termData->transactionDate[2] != '/' || termData->transactionDate[5] != '/')
+    if(strlen(termData->transactionDate) < 10 || strlen(termData->transactionDate) > 10)
         return WRONG_DATE;
     else
         return TERMINAL_OK;
@@ -73,22 +71,22 @@ EN_terminalError_t isCardExpired(ST_cardData_t* cardData, ST_terminalData_t* ter
 
     //cardExpirationDate -->MM/YY, transactionDate--> DD/MM/YYYY
     
-    //comparing the 1st  digit of the year number, for example 2025 --> comparing 2 
+    //comparing the 1st  digit of the year number, for example 2025, 17 --> comparing 1, 2
     if ((int)cardData->cardExpirationDate[3] < (int)termData->transactionDate[8])
         return EXPIRED_CARD;
-    //comparing the 1st and 2nd digits of the year number, for example 2025 --> comparing 25 
+    //comparing the 1st and 2nd digits of the year number, for example 2025, 23 --> comparing 25 
     else if ((int)cardData->cardExpirationDate[3] == (int)termData->transactionDate[8] && (int)cardData->cardExpirationDate[4] < (int)termData->transactionDate[9])
         return EXPIRED_CARD;
-    // comparing month in case of years are equals
+    // comparing month in case of years are equals, for example 12/2025, 07/25 -->  25 == 25
     else if ((int)cardData->cardExpirationDate[3] == (int)termData->transactionDate[8] && (int)cardData->cardExpirationDate[4] == (int)termData->transactionDate[9])
     {
-        // checking 1st digit in month
+        // checking 1st digit in month, in previous example comparing 12, 07 --> 0<1
         if ((int)cardData->cardExpirationDate[0] < (int)termData->transactionDate[3])
             return EXPIRED_CARD;
-        // checking 2nd digit in case of digits 1 are equals
+        // checking 2nd digit in case of digits 1 are equals, 12,11 --> 1<2
         else if((int)cardData->cardExpirationDate[0] == (int)termData->transactionDate[3] && (int)cardData->cardExpirationDate[1] < (int)termData->transactionDate[4])
             return EXPIRED_CARD;
-        // checking if two digits are equal
+        // checking if two digits are equal, 
         else if ((int)cardData->cardExpirationDate[0] == (int)termData->transactionDate[3] && (int)cardData->cardExpirationDate[1] == (int)termData->transactionDate[4])
             return EXPIRED_CARD;
     }
@@ -96,6 +94,22 @@ EN_terminalError_t isCardExpired(ST_cardData_t* cardData, ST_terminalData_t* ter
     else
         return TERMINAL_OK;
 }
+
+EN_terminalError_t setMaxAmount(ST_terminalData_t* termData)
+{
+    /*
+        This function sets the maximum allowed amount into terminal data.
+        Transaction max amount is a float number.
+        If transaction max amount less than or equal to 0 will return INVALID_MAX_AMOUNT error, else return TERMINAL_OK.
+    */
+    printf("Enter the maximum transaction amount: ");
+    scanf_s("%f", &(termData->maxTransAmount));
+    if (termData->maxTransAmount <= 0)
+        return INVALID_MAX_AMOUNT;
+    else
+        return TERMINAL_OK;
+}
+
 EN_terminalError_t getTransactionAmount(ST_terminalData_t* termData)
 {
     /*
@@ -119,23 +133,9 @@ EN_terminalError_t isBelowMaxAmount(ST_terminalData_t* termData)
         If the transaction amount is larger than the terminal max amount will return EXCEED_MAX_AMOUNT,
         else return TERMINAL_OK.
     */
-    if (termData->transAmount < termData->maxTransAmount)
+    if (termData->transAmount > termData->maxTransAmount)
         return EXCEED_MAX_AMOUNT;
     else
         return TERMINAL_OK;
 
-}
-EN_terminalError_t setMaxAmount(ST_terminalData_t* termData)
-{
-    /*
-        This function sets the maximum allowed amount into terminal data.
-        Transaction max amount is a float number.
-        If transaction max amount less than or equal to 0 will return INVALID_MAX_AMOUNT error, else return TERMINAL_OK.
-    */
-    printf("Enter the maximum transaction amount: ");
-    scanf_s("%f", &(termData->maxTransAmount));
-    if (termData->maxTransAmount <= 0)
-        return INVALID_MAX_AMOUNT;
-    else
-        return TERMINAL_OK;
 }
