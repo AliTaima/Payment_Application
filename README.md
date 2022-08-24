@@ -39,5 +39,12 @@ It's required to create these four functions to implement this module
 - EN_serverError_t isValidAccount(ST_cardData_t* cardData, ST_accountsDB_t* accountRefrence)
 - EN_serverError_t isBlockedAccount(ST_accountsDB_t* accountRefrence)
 - EN_serverError_t isAmountAvailable(ST_terminalData_t* termData, ST_accountsDB_t* accountRefrence)
-  - This [README_file](https://github.com/AliTaima/Payment_Application/tree/main/Payment_Application/Server) contains screenshot for server.h file and videos to explain each function
+  - This [README_file](https://github.com/AliTaima/Payment_Application/tree/main/Payment_Application/Server) contains screenshot for server.h file,  server-side accounts' database array, server-side transactions' database and videos to explain each function
+### The app module
+--
+It's required to create this function to implement this module
+- void appStart(void)
+  - This [README_file](https://github.com/AliTaima/Payment_Application/blob/main/Payment_Application/Application/README.md) contains screenshot for app.h file and videos to explain this function try required five test cases
+
+
 
