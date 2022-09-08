@@ -33,7 +33,7 @@ It's required to create these five functions to implement this module
 - EN_terminalError_t isBelowMaxAmount(ST_terminalData_t *termData)
 - EN_terminalError_t setMaxAmount(ST_terminalData_t *termData)
   - This [README_file](https://github.com/AliTaima/Payment_Application/tree/main/Payment_Application/terminal) contains screenshot for termnal.h file and videos to explain each function
-### The server module
+### The server module 
 ---
 It's required to create these four functions to implement this module
 - EN_transState_t recieveTransactionData(ST_transaction_t* transData)
